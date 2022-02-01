@@ -19,4 +19,16 @@ export default makeStyles((theme) => ({
   list: {
     height: '75vh', overflow: 'auto',
   },
+  button : {
+    display: 'flex',
+    justifyContent: 'center',
+    borderColor: 'black', 
+    borderWidth: '2px', 
+    padding: 500,
+    marginLeft: '20px', 
+    marginTop: '15px',
+  },
+  answer : {
+    marginLeft: 40,
+  },
 }));

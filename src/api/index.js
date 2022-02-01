@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'https://opentdb.com/api.php?amount=20&encode=url3986';
+const URL = 'https://opentdb.com/api.php?amount=1&encode=url3986';
 const options = {};
 
 const getTriviaData = async (category, difficulty, type) => {
