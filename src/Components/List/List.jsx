@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card'
 
 
 import useStyles from './styles';
+import { Co2Sharp } from '@mui/icons-material';
 
 function shuffle(array) {
     let temp_arr = [];
@@ -54,7 +55,7 @@ const List = ({questions, difficulty, setUserAnswer, userAnswer, questionPoints,
                 return "danger";
             }
         } else {
-            return "primary";
+            return "outline-dark";
         }
     }
 
@@ -86,11 +87,9 @@ const List = ({questions, difficulty, setUserAnswer, userAnswer, questionPoints,
                             </Grid>
                             ) : (
                                 <Grid container spacing={3} style={{display: 'flex', justifyContent: 'center', marginBottom: 20}} >
-                                    <Grid item > 
-                                        <Button id="true" color="primary" variant="outlined" style={{borderColor: 'black', borderWidth: 2}} onClick={() => setUserAnswer('true')}>True</Button>
-                                    </Grid>
-                                    <Grid item> 
-                                        <Button id="false" color="primary" variant="outlined" style={{borderColor: 'black', borderWidth: 2}} onClick={() => setUserAnswer('false')}>False</Button>
+                                    <Grid item id={i}>
+                                        <ToggleButton variant={choose_variant()} value={true} onClick={(e) => setChoiceValue(true)} className={classes.button}> True </ToggleButton>
+                                        <ToggleButton variant={choose_variant()} value={false} onClick={(e) => setChoiceValue(false)} className={classes.button}> False </ToggleButton>
                                     </Grid>
                                 </Grid>
                             )

@@ -7,6 +7,8 @@ import Alert from 'react-bootstrap/Alert';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
+import { Link } from "react-router-dom";
+
 import Header from '../Header/Header';
 import List from '../List/List.jsx';
 import User from '../User/User.jsx';
@@ -94,19 +96,6 @@ const Home = () => {
                                 setUserScore={setUserScore}
                                 userScore={userScore}
                             />
-                            <OverlayTrigger
-                                container={ref}
-                                show={show}
-                                placement="bottom"
-                            >
-                                <Popover id="popover-basic">
-                                    <Popover.Header as="h3">Popover right</Popover.Header>
-                                    <Popover.Body>
-                                    And here's some <strong>amazing</strong> content. It's very engaging.
-                                    right?
-                                    </Popover.Body>
-                                </Popover>
-                            </OverlayTrigger>
                 </Grid>
             </Grid>
         </>
