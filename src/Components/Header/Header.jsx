@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, InputBase, Box } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+import Button from '@mui/material/Button';
 
 import useStyles from './styles';
 
@@ -16,10 +16,10 @@ const Header = () => {
                 <Box display="flex">
                     { /* <AutoComplete> */ }
                         <div className={classes.search}>
-                            <div className={classes.searchIcon}>
-                                <SearchIcon />
-                            </div>
-                            <InputBase placeholder="Search..." classes={{root: classes.inputRoot, input: classes.inputInput}} />
+                            <Button variant="primary"> Log in </Button>
+                        </div>
+                        <div className={classes.search}>
+                            <Button variant="primary"> Sign up </Button>
                         </div>
                     { /* </AutoComplete> */ }
                 </Box>

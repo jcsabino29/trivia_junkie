@@ -1,13 +1,5 @@
 import React, { useEffect, useState, useRef} from 'react';
-import { CssBaseline, Grid, Typography, Button } from '@material-ui/core';
-import Fade from 'react-bootstrap/Fade';
-import Card from 'react-bootstrap/Card';
-import CloseButton from 'react-bootstrap/CloseButton';
-import Alert from 'react-bootstrap/Alert';
-import Popover from 'react-bootstrap/Popover';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-
-import { Link } from "react-router-dom";
+import { CssBaseline, Grid, Button } from '@material-ui/core';
 
 import Header from '../Header/Header';
 import List from '../List/List.jsx';

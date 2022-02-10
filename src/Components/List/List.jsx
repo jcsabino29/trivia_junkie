@@ -1,29 +1,10 @@
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Grid, Typography } from '@material-ui/core';
 import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import Card from 'react-bootstrap/Card'
 
-
 import useStyles from './styles';
-import { Co2Sharp } from '@mui/icons-material';
-
-function shuffle(array) {
-    let temp_arr = [];
-    let indices = [0, 1, 2, 3]
-    let randomIndex = 0;
-    let i = 0;
-
-    //console.log("Actual array: " + array);
-    while (indices.length != 0) {
-        randomIndex = (Math.floor(Math.random() * 100)) % indices.length;
-        temp_arr = temp_arr.concat(array[indices[randomIndex]]);
-        indices.splice(randomIndex, 1); //Remove the element
-        i++;
-    }
-
-    return temp_arr;
-}
 
 const List = ({questions, difficulty, setUserAnswer, userAnswer, questionPoints, choices, userScore, setUserScore}) => {
     const classes = useStyles();
@@ -37,9 +18,9 @@ const List = ({questions, difficulty, setUserAnswer, userAnswer, questionPoints,
         setChoiceValue('');
         setUserAnswer(choice_value);
         console.log("The user answer: " + userAnswer + " the choice value: " + choice_value);
-        (decodeURIComponent(correct_answer) == decodeURIComponent(choice_value)) ? console.log("YOU ARE CORRECT") : console.log("YOU ARE WRONG");
+        (decodeURIComponent(correct_answer) === decodeURIComponent(choice_value)) ? console.log("YOU ARE CORRECT") : console.log("YOU ARE WRONG");
         console.log("Before adding: " + questionPoints + " User score: " + userScore);
-        (decodeURIComponent(correct_answer) == decodeURIComponent(choice_value)) ? setUserScore(Number(userScore) + Number(questionPoints)) :  setUserScore(Number(userScore) - Number(questionPoints));
+        (decodeURIComponent(correct_answer) === decodeURIComponent(choice_value)) ? setUserScore(Number(userScore) + Number(questionPoints)) :  setUserScore(Number(userScore) - Number(questionPoints));
         console.log("The user score: " + userScore);
     }
 
@@ -49,7 +30,7 @@ const List = ({questions, difficulty, setUserAnswer, userAnswer, questionPoints,
 
     const choose_variant = (correct_answer, choice_value) => {
         if (isAnswerClicked) {
-            if ((decodeURIComponent(correct_answer) == decodeURIComponent(choice_value))) {
+            if ((decodeURIComponent(correct_answer) === decodeURIComponent(choice_value))) {
                 return "success";
             } else {
                 return "danger";
@@ -73,7 +54,7 @@ const List = ({questions, difficulty, setUserAnswer, userAnswer, questionPoints,
                             <Typography variant="subtitle1" style={{fontWeight: 'bold'}}> {decodeURIComponent(questions[i].question)}  </Typography>
                         </Card.Text>
 
-                        {(question.type == "multiple") ? (
+                        {(question.type === "multiple") ? (
                             correct_answer = question.correct_answer,
                             console.log("The correct answer : " + correct_answer),
 
@@ -95,7 +76,7 @@ const List = ({questions, difficulty, setUserAnswer, userAnswer, questionPoints,
                             )
                         }
                     </Card>,
-                    <Button variant="primary" disabled={(choice_value) == '' ? true: false } onClick={() => confirmed(correct_answer)} style={{marginTop: 10}}> Submit </Button>
+                    <Button variant="primary" disabled={(choice_value) === '' ? true: false } onClick={() => confirmed(correct_answer)} style={{marginTop: 10}}> Submit </Button>
                 </Grid>
             ))}
         </Grid>
