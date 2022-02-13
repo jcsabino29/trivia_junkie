@@ -7,7 +7,7 @@ import SignUp from './Components/Sign-Up/Sign-Up.jsx';
 
 const App = () => {
     return (
-      <LogIn />
+      <SignUp />
     );
 }
 
