@@ -38,7 +38,7 @@ export default class UsersController {
         }
     }
 
-    static async apiFindUser (req, res) {
+    static async apiFindUser (req, res, next) {
         try {
             const userResponse = await usersDAO.findUser(req.body.username);
             if (userResponse) {
