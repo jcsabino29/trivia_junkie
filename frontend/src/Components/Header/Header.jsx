@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 
 import useStyles from './styles';
 
-const Header = () => {
+const Header = (currentPage, setCurrentPage) => {
     const classes = useStyles();
 
     return (
@@ -13,16 +13,6 @@ const Header = () => {
                 <Typography variant="h5">
                     Trivia Junkie
                 </Typography>
-                <Box display="flex">
-                    { /* <AutoComplete> */ }
-                        <div className={classes.search}>
-                            <Button variant="primary"> Log in </Button>
-                        </div>
-                        <div className={classes.search}>
-                            <Button variant="primary"> Sign up </Button>
-                        </div>
-                    { /* </AutoComplete> */ }
-                </Box>
             </Toolbar>
         </AppBar>
     );

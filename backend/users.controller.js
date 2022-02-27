@@ -40,14 +40,15 @@ export default class UsersController {
 
     static async apiFindUser (req, res, next) {
         try {
-            const userResponse = await usersDAO.findUser(req.body.username);
-            if (userResponse) {
-                res.json("Found userList.");
-                return req.body.username;
+            const email = await usersDAO.findUser(req.params.email_address, req.params.username);
+            console.log(email)
+
+            if (email) {
+                res.json(email);
             } else {
-                res.json("Cannot find userList.");
+                res.json("Cannot find user.");
             }
-            res.json("Finding userList successfully called.");
+            //res.json("Finding userList successfully called.");
         } catch (e) {
             res.status(500).json({error: e.message});
         }

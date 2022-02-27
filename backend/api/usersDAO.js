@@ -34,23 +34,15 @@ export default class usersDAO {
     }
 
 
-    static async findUser({
-        filters=null,
-        page=0,
-    } = {}) {
-        let query
-        if (filters) {
-            if("name" in filters) {
-                query = { $text: { $eq: filters["username"]}}
-            }
-        }
-
-        let cursor
-
+    static async findUser(email_address, username) {
+        //let [email_address, username] = data;
         try {
-            console.log("!!!!");
-            cursor = await users.find(query)
-            console.log(cursor);
+            let query = await users.find({
+                $or: [{"email_address": email_address}, {"username": username}]
+            })
+            let displayQuery = await query.limit(10).skip(0).toArray();
+            //console.log("Username: " + email_address);
+            return displayQuery;
         } catch (e) {
             console.error(`Unable to issue find command: ${e}`)
             return { user: '' }

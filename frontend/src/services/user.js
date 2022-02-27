@@ -1,16 +1,13 @@
 import http from '../http-common.js';
 
 class UserDataService {
-    getAll() {
-        return http.get('/');
-    }
-
     createUser(data) {
-        return http.post("/", data);
+        return http.post('/', data);
     }
 
-    findUser(username) {
-        return http.get("/", username);
+    findUser(email_address, username) {
+        console.log("THE QUERY: " + email_address + " USER: " + username);
+        return http.get(`?username=${username}&email_address=${email_address}`);
     }
 }
 

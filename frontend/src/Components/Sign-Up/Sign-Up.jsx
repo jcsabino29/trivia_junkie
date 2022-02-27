@@ -5,35 +5,45 @@ import UserDataService from "../../services/user";
 import useStyles from './styles';
 import Header from '../Header/Header';
 
-const SignUp = () => {
+const SignUp = ({isLogin, setLogin}) => {
     const classes = useStyles();
     const [fullName, setFullName] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email_address, setEmailAddress] = useState('');
-    const [isLogin, setLogin] = useState(false);
-
 
     const saveUser = () => {
-        const newUser = {
+        var newUser = {
             fullName: fullName,
             username: username,
             password: password,
             email_address: email_address,
         }
 
-         UserDataService.createUser(newUser)
-            .then(user => {
-                setLogin(true)
+        UserDataService.findUser(email_address, username)
+            .then((res) => {
+                console.log("The find user: " + res.data);
             })
             .catch(e => {
+                console.log("Error finding user: " + {e});
+            })
+
+        //const {data: { data }} = axios.get(url);
+        console.log("THE EMAIL: " + email_address + " USERNAE: " + username);
+
+        UserDataService.createUser(newUser)
+            .then((res) => {
+                setLogin(true)
+                console.log(res.data);
+            })
+            .catch(e => {
+                console.log(newUser);
                 console.log("Error saving user: " + {e});
             })
     }
 
     return (
         <>
-            <Header />
             <React.Fragment>
                 <CssBaseline />
                 <Container maxWidth="sm">

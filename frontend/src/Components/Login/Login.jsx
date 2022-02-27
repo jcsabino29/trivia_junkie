@@ -28,7 +28,6 @@ const Login = () => {
     return (
         <>
             <CssBaseline />
-            <Header/>
             <CssBaseline />
                 <Container maxWidth="sm">
                     <Card xs={12} md={12} sx={{mt: 10, height: '30vh'}} >
