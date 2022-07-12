@@ -1,4 +1,5 @@
 import usersDAO from "./api/usersDAO.js";
+const User = require('./models/user.model.js');
 
 export default class UsersController {
     static async apiGetUsers(req, res, next) {
@@ -19,20 +20,16 @@ export default class UsersController {
 
     static async apiPostUser(req, res, next) {
         try {
-            const fullName = req.body.fullName;
-            const username = req.body.username;
-            const password = req.body.password;
-            const email_address = req.body.email_address;
-            const points = req.body.points;
+            const newUser = User({
+                fullName: req.body.fullName,
+                username: req.body.username,
+                password: req.body.password,
+                email_address: req.body.email_address,
+                points: req.body.points
+            });
 
-            const userResponse = await usersDAO.addUser(
-                fullName,
-                username,
-                password,
-                email_address,
-                points
-            )
-            res.json("Added userList.")
+            const userResponse = await usersDAO.addUser(newUser);
+            res.json("The user: " + JSON.stringify(userResponse));
         } catch (e) {
             res.status(500).json({error: e.message});
         }
@@ -40,14 +37,16 @@ export default class UsersController {
 
     static async apiFindUser (req, res, next) {
         try {
-            const email = await usersDAO.findUser(req.params.email_address, req.params.username);
-            console.log(email)
-
+            const users = await usersDAO.findUser(req.params.username);
+            console.log("The username: " + { users });
+            
+            res.json({users});
+            /*
             if (email) {
                 res.json(email);
             } else {
                 res.json("Cannot find user.");
-            }
+            }*/
             //res.json("Finding userList successfully called.");
         } catch (e) {
             res.status(500).json({error: e.message});

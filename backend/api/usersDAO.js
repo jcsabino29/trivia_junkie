@@ -9,6 +9,7 @@ export default class usersDAO {
         }
         try {
             users = await conn.db(process.env.ATLAS_MS).collection("user_profiles");
+            
             //await users.insertOne({name: "Armin", email_address: "hugo@yahoo.com"});
             //await users.find().forEach((item) => console.log(item))
             //console.log(await users.find());
@@ -22,9 +23,9 @@ export default class usersDAO {
         let displayCursor
 
         try {
-            cursor = await users.find()
-            displayCursor = await cursor.limit(10).skip(1).toArray()
-            console.log(displayCursor)
+            cursor = await users.find({}, { projection: { _id: 0, password: 0 }})
+            displayCursor = await cursor.limit(10).skip(0).toArray()
+            console.log({displayCursor: { users }})
             //cursor.forEach(item => console.log(item))
             return displayCursor
         } catch (e) {
@@ -34,14 +35,16 @@ export default class usersDAO {
     }
 
 
-    static async findUser(email_address, username) {
-        //let [email_address, username] = data;
+    static async findUser(username) {
+        //Ignores case
+        var regex = new RegExp(["^", username, "$"].join(""), "i");
+
         try {
             let query = await users.find({
-                $or: [{"email_address": email_address}, {"username": username}]
-            })
+                username: regex
+            }, { projection: { password: 0, _id: 0 } });
             let displayQuery = await query.limit(10).skip(0).toArray();
-            //console.log("Username: " + email_address);
+            console.log("displayQuery: " + JSON.stringify(displayQuery)) ;
             return displayQuery;
         } catch (e) {
             console.error(`Unable to issue find command: ${e}`)
@@ -58,8 +61,10 @@ export default class usersDAO {
                 email_address: email_address,
                 points: Number(1000)
             }
-
-            return await users.insertOne(userDoc);
+            
+            await users.createIndex(userDoc);
+            console.log("Created successfully!")
+            return userDoc;
         } catch (e) {
             console.error(`Unable to post user: ${e}`)
             return { error: e}

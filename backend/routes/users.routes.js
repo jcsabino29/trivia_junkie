@@ -5,7 +5,14 @@ const router = express.Router();
 
 router
     .route("/")
-    .get(UsersCtrl.apiFindUser)
+    .get(UsersCtrl.apiGetUsers)
     .post(UsersCtrl.apiPostUser);
+
+
+//Finds a specific user by username
+router
+    .route(`/username/:username`)
+    .get(UsersCtrl.apiFindUser);
+
 
 export default router;
