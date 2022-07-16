@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-Schema = mongoose.Schema;
+import pkg from 'mongoose';
+const { Schema } = pkg;
 
 const userSchema = new Schema ({
     fullName: {
@@ -9,6 +9,7 @@ const userSchema = new Schema ({
     username: {
         type: String,
         required: true,
+        unique: true,
     },
     password: {
         type: String,
@@ -25,5 +26,4 @@ const userSchema = new Schema ({
     },
 }, {timestamps: true, collection: 'user_profiles'});
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+export const User = pkg.model('User', userSchema);
